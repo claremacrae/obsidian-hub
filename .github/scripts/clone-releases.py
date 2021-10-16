@@ -9,17 +9,21 @@ import argparse
 from utils import (
     get_json_from_github
 )
-from utils import PLUGINS_JSON_FILE, THEMES_JSON_FILE, OUTPUT_DIR
+from utils import PLUGINS_JSON_FILE, THEMES_JSON_FILE
 
 
 def clone_repo(plugin):
     repo = plugin.get("repo")
     branch = plugin.get("branch", "master")
     user = repo.split("/")[0]
+    # mkdir -p user
+    # cd       user
     print(f"git clone https://github.com/{repo}.git")
 
 
 def process_released_plugins(overwrite=False):
+    # mkdir -p plugins
+    # cd       plugins
     plugin_list = get_json_from_github(PLUGINS_JSON_FILE)
     for plugin in plugin_list:
         clone_repo(plugin)
@@ -27,6 +31,8 @@ def process_released_plugins(overwrite=False):
 
 def process_released_themes(overwrite=False):
     print("-----\nProcessing themes....\n")
+    # mkdir -p css-themes
+    # cd       css-themes
     theme_list = get_json_from_github(THEMES_JSON_FILE)
     for theme in theme_list:
         clone_repo(theme)
