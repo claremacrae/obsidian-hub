@@ -1,5 +1,12 @@
 import os
 
+# Comments for review:
+# - File name:
+#   - I thought it was big enough to separate from utils.py
+#   - I tried directory-utils.py - but the hyphen meant I could  not import it
+#   - And an underscore in directory_utils.py was inconsistent with existing filenames
+
+
 pushstack = list()
 
 
@@ -14,7 +21,7 @@ def popdir():
     os.chdir(pushstack.pop())
 
 
-def use_directory(dir):
+def use_directory(dir, create_if_missing):
     class PushPopDirectory:
         def __init__(self, dir):
             self.dir = dir
@@ -25,5 +32,6 @@ def use_directory(dir):
         def __exit__(self, exc_type, exc_val, exc_tb):
             popdir()
 
-    os.makedirs(dir, exist_ok=True)
+    if create_if_missing:
+        os.makedirs(dir, exist_ok=True)
     return PushPopDirectory(dir)
