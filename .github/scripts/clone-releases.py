@@ -28,10 +28,14 @@ def readable_dir(prospective_dir):
 def clone_repo(plugin):
     repo = plugin.get("repo")
     branch = plugin.get("branch", "master")
-    user = repo.split("/")[0]
+    user, repo_name = repo.split("/")
     with use_directory(user, create_if_missing=True):
-        command = f"git clone https://github.com/{repo}.git"
-        subprocess.run(command, shell=True, check=True)
+        if not os.path.isdir(repo_name):
+            print(f"cloning {repo}")
+            command = f"git clone https://github.com/{repo}.git"
+            subprocess.run(command, shell=True, check=True)
+        else:
+            print(f"{repo} already exists")
 
 
 def process_released_plugins(overwrite=False):
