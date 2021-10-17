@@ -1,6 +1,7 @@
 import os
 import sys
 import argparse
+import subprocess
 
 # TODO Control which of these:
 #       https://github.com/username/projectname.git
@@ -29,7 +30,8 @@ def clone_repo(plugin):
     branch = plugin.get("branch", "master")
     user = repo.split("/")[0]
     with use_directory(user, create_if_missing=True):
-        print(f"git clone https://github.com/{repo}.git")
+        command = f"git clone https://github.com/{repo}.git"
+        subprocess.run(command, shell=True, check=True)
 
 
 def process_released_plugins(overwrite=False):
@@ -56,8 +58,8 @@ def main(argv=sys.argv[1:]):
 
     with use_directory(args.output_directory, create_if_missing=False):
         print(f"Working directory: {os.getcwd()}")
-        process_released_plugins(args.overwrite)
-        process_released_themes(args.overwrite)
+        process_released_plugins()
+        process_released_themes()
 
 
 if __name__ == "__main__":
