@@ -16,7 +16,7 @@ jobs:
     if: github.repository_owner != 'obsidian-community'
 
     steps:
-      - name: Warn that workflow ${env.GITHUB_WORKFLOW} disabled if running on a fork
+      - name: Warn that workflow ${{env.GITHUB_WORKSPACE}} disabled if running on a fork
         run: echo This workflow ${GITHUB_WORKFLOW} is disabled when running from a fork
         shell: bash
 
