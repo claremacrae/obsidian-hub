@@ -11,6 +11,15 @@ on:
     inputs:
 
 jobs:
+  warn_if_running_on_fork:
+    runs-on: ubuntu-latest
+    if: github.repository_owner != 'obsidian-community'
+
+    steps:
+      - name: Warn that action disabled if running on a fork
+        run: echo This action is disabled when running from a fork
+        shell: bash
+
   update_hub_content:
     runs-on: ubuntu-latest
 
