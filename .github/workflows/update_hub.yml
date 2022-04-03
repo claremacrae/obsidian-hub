@@ -83,7 +83,6 @@ jobs:
         with:
           title: Scripted update of Hub content
           branch: create-pull-request/update_hub
-          delete-branch: true
           labels: |
             scripted update
 
