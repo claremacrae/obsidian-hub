@@ -42,7 +42,7 @@ jobs:
 
   warn_if_running_on_fork:
     runs-on: ubuntu-latest
-    if: github.repository_owner != 'claremacrae'
+    if: github.repository_owner != 'obsidian-community'
 
     steps:
       - name: Warn that workflow ${{ github.workflow }} disabled if running on a fork
@@ -54,7 +54,7 @@ jobs:
 
     # Prevent cron job from triggering on forks
     # (This unfortunately prevents testing via manual trigger on forks too)
-    if: github.repository_owner == 'claremacrae'
+    if: github.repository_owner == 'obsidian-community'
 
     steps:
       # ----------------------------------------------------------------------------------
